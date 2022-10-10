@@ -1,0 +1,104 @@
+.container {
+  margin: 1rem;
+  position: relative;
+}
+
+.listInfo {
+  display: flex;
+  margin: 0 .5rem;
+}
+
+.refreshBtn {
+  background: var(--background);
+  color: var(--white);
+  border: none;
+  border-radius: .2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: .25rem;
+  margin-right: .5rem;
+  transition: all ease .2s;
+
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  &:hover {
+    background: var(--purple);
+  }
+}
+
+.movies {
+  display: flex;
+  overflow: hidden;
+  transition: all ease .2s;
+
+  .movieCard {
+    background: transparent;
+    border: none;
+    position: relative;
+    width: 150px;
+
+    &:hover {
+      z-index: 9;
+
+      .movieName {
+        display: block;
+      }
+    }
+  
+    &+ .movieCard {
+      margin-left: 1rem;
+    }
+  }
+
+  .movieName {
+    display: none;
+    position: absolute;
+    background-color: #000;
+    height: fit-content;
+    color: var(--white);
+    font-size: .65rem;
+    padding: .25rem;
+  }
+
+  img {
+    height: 220px;
+    transition: all ease .2s;
+    cursor: pointer;
+    border-radius: .25rem;
+  }
+}
+
+.buttons {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  top: 125px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    border-radius: .25rem;
+    transition: all ease .2s;
+
+    &:hover {
+      background: var(--background);
+    }
+
+    svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}

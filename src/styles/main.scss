@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #1c1c1c;
+  --white: #d1d1d1;
+  --purple: #49177f;
+}
+
+body, h1, [placeholder] {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--white);
+}
+
+button {
+  transition: all ease .2s;
+
+  &:hover:not([disabled]) {
+    cursor: pointer;
+    filter: brightness(.9);
+  }
+}
+
+[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+#swal2-title.swal2-title {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 680px) {
+  #swal2-title.swal2-title {
+    font-size: 1.2rem;
+  }
+}

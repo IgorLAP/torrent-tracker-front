@@ -1,0 +1,136 @@
+.container {
+  margin: 1rem;
+  position: relative;
+
+  h1 {
+    margin: 1rem;
+    text-align: center;
+  }
+}
+
+.main {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0;
+
+  input {
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--white);
+    color: var(--white);
+    padding: .4rem .25rem;
+    width: 50%;
+    height: 45px;
+    font-size: 1rem;
+    transition: all ease .2s;
+
+    &::placeholder {
+      color: var(--white);
+    }
+  }
+
+  button {
+    height: 45px;
+    width: 40px;
+    background: var(--background);
+    color: var(--white);
+    border: none;
+    margin: auto 0;
+    padding: .25rem;
+    margin-left: .2rem;
+    border-radius: .25rem;
+    transition: all ease .2s;
+
+    &:hover {
+      background: var(--purple);
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  margin: 1rem 0;
+  border-spacing: 0 .5rem;
+
+  th {
+    text-align: start;
+    text-transform: uppercase;
+    min-width: 80px;
+  }
+
+  td {
+    cursor: pointer;
+    padding: 0 .25rem;
+  }
+
+  tbody tr td:not(:first-child) {
+    text-align: end;
+  }
+
+  tr {
+    transition: all ease .2s;
+    line-height: 1.5rem;
+
+    &:hover {
+      filter: brightness(.7);
+    }
+  }
+
+  @for $i from 1 through 40 {
+    @if $i % 2 == 0 {
+      tbody tr:nth-child(#{$i}) {
+        background: transparent;
+      }
+    }
+    @else {
+      tbody tr:nth-child(#{$i}) {
+        background: var(--purple);
+      }
+    }
+  }
+}
+
+.loading {
+  margin: auto;
+
+  &.absoluteLoading {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .8);
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .table {
+    font-size: .9rem;
+
+    tbody tr td:first-child {
+      max-width: 220px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+}
