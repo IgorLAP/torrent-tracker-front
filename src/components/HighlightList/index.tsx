@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
@@ -29,7 +29,7 @@ export function HighlightList({
   function refreshMovies() {
     if (movies.length > 0) setAbsoluteLoading(true);
     fetch(
-      `https://torrenttracker.onrender.com/new-movies?cat=${
+      `https://torrent-tracker.deta.dev/new-movies?cat=${
         title === "4K Movies" ? "2" : "1"
       }`
     )
@@ -78,37 +78,37 @@ export function HighlightList({
 
   return (
     <div className={styles.container}>
-      <div className={styles.listInfo}>
+      <div className={styles["list-action"]}>
         <button
           type="button"
-          className={styles.refreshBtn}
+          className={styles["refresh-btn"]}
           onClick={refreshMovies}
         >
           <BiRefresh />
         </button>
         <h2>{title}</h2>
       </div>
-      <div style={{ marginLeft: scrollX }} className={styles.movies}>
+      <div style={{ marginLeft: scrollX }} className={styles["movie-slider"]}>
         {movies.map((movie, index) => (
           <button
-            type="button"
-            id={putId(index)}
-            className={styles.movieCard}
             key={movie.name}
+            type="button"
+            className={styles["movie-card"]}
+            id={putId(index)}
             onMouseMove={(e) => handleHover(e, e.currentTarget.id)}
             onClick={() => handleGetLink(movie.link, movie.name)}
           >
             <img src={movie.poster} alt={movie.name} />
             <p
               style={{ top: yPos as number, left: xPos as number }}
-              className={styles.movieName}
+              className={styles["movie-name"]}
             >
               {movie.name}
             </p>
           </button>
         ))}
       </div>
-      <div className={styles.buttons}>
+      <div className={styles["control-btns"]}>
         <button type="button" onClick={handleGoLeft} disabled={scrollX === 0}>
           <AiOutlineLeft />
         </button>

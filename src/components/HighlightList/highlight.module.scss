@@ -3,12 +3,12 @@
   position: relative;
 }
 
-.listInfo {
+.list-action{
   display: flex;
-  margin: 0 .5rem;
+  margin: .5rem;
 }
 
-.refreshBtn {
+.refresh-btn {
   background: var(--background);
   color: var(--white);
   border: none;
@@ -30,12 +30,12 @@
   }
 }
 
-.movies {
+.movie-slider {
   display: flex;
   overflow: hidden;
   transition: all ease .2s;
 
-  .movieCard {
+  .movie-card {
     background: transparent;
     border: none;
     position: relative;
@@ -44,17 +44,17 @@
     &:hover {
       z-index: 9;
 
-      .movieName {
+      .movie-name {
         display: block;
       }
     }
   
-    &+ .movieCard {
+    &+ .movie-card {
       margin-left: 1rem;
     }
   }
 
-  .movieName {
+  .movie-name {
     display: none;
     position: absolute;
     background-color: #000;
@@ -72,7 +72,7 @@
   }
 }
 
-.buttons {
+.control-btns {
   position: absolute;
   left: 0;
   right: 0;

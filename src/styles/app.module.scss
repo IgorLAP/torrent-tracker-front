@@ -78,7 +78,7 @@
     padding: 0 .25rem;
   }
 
-  tbody tr td:not(:first-child) {
+  .content-tr td:not(:first-child) {
     text-align: end;
   }
 
@@ -91,14 +91,14 @@
     }
   }
 
-  @for $i from 1 through 40 {
+  @for $i from 1 through 50 {
     @if $i % 2 == 0 {
-      tbody tr:nth-child(#{$i}) {
+      .content-tr:nth-child(#{$i}) {
         background: transparent;
       }
     }
     @else {
-      tbody tr:nth-child(#{$i}) {
+      .content-tr:nth-child(#{$i}) {
         background: var(--purple);
       }
     }
@@ -108,7 +108,7 @@
 .loading {
   margin: auto;
 
-  &.absoluteLoading {
+  &.absolute-loading {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -126,7 +126,7 @@
   .table {
     font-size: .9rem;
 
-    tbody tr td:first-child {
+    .content-tr td:first-child {
       max-width: 220px;
       text-overflow: ellipsis;
       white-space: nowrap;

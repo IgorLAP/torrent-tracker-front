@@ -23,7 +23,7 @@ export function App() {
 
   function getMovies() {
     if (movies.length === 0) setLoading(true);
-    fetch("https://torrenttracker.onrender.com/new-movies")
+    fetch("https://torrent-tracker.deta.dev/new-movies")
       .then((results) => results.json())
       .then((response) => {
         setMovies(response.movies);
@@ -59,7 +59,7 @@ export function App() {
           return;
         }
         setAbsoluteLoading(true);
-        fetch("https://torrenttracker.onrender.com/get-link", {
+        fetch("https://torrent-tracker.deta.dev/get-link", {
           method: "post",
           headers: {
             Accept: "application/json",
@@ -85,7 +85,7 @@ export function App() {
     e.preventDefault();
     if (!search) return;
     setAbsoluteLoading(true);
-    fetch("https://torrenttracker.onrender.com/search-torrents", {
+    fetch("https://torrent-tracker.deta.dev/search-torrents", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -168,6 +168,7 @@ export function App() {
                       {torrents.map((torrent) => (
                         <tr
                           key={torrent.link}
+                          className={styles["content-tr"]}
                           onClick={() =>
                             handleGetLink(torrent.link, torrent.name)
                           }
@@ -186,7 +187,7 @@ export function App() {
         )}
       </div>
       {absoluteLoading && (
-        <div className={`${styles.loading} ${styles.absoluteLoading}`}>
+        <div className={`${styles.loading} ${styles["absolute-loading"]}`}>
           <ReactLoading type="bars" color="white" height="10%" width="10%" />
         </div>
       )}
