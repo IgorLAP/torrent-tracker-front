@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { BiRefresh } from "react-icons/bi";
 
 import { Movie } from "~/interfaces/Movie";
 
@@ -11,38 +10,16 @@ interface HighlightListProps {
   title: "Movies" | "4K Movies";
   movies: Movie[];
   handleGetLink: (href: string, name: string) => Promise<void>;
-  setAbsoluteLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
 export function HighlightList({
   title,
   movies,
   handleGetLink,
-  setAbsoluteLoading,
-  setMovies,
 }: HighlightListProps) {
   const [scrollX, setScrollX] = useState(0);
   const [xPos, setXPos] = useState(0);
   const [yPos, setYPos] = useState(0);
-
-  function refreshMovies() {
-    if (movies.length > 0) setAbsoluteLoading(true);
-    fetch(
-      `https://torrent-tracker.deta.dev/new-movies?cat=${
-        title === "4K Movies" ? "2" : "1"
-      }`
-    )
-      .then((results) => results.json())
-      .then((response) => {
-        setMovies(response.movies);
-        setAbsoluteLoading(false);
-      })
-      .catch((error) => {
-        setAbsoluteLoading(false);
-        alert(error.message);
-      });
-  }
 
   function handleGoLeft() {
     let x = scrollX + Math.round(window.innerWidth / 2);
@@ -78,16 +55,7 @@ export function HighlightList({
 
   return (
     <div className={styles.container}>
-      <div className={styles["list-action"]}>
-        <button
-          type="button"
-          className={styles["refresh-btn"]}
-          onClick={refreshMovies}
-        >
-          <BiRefresh />
-        </button>
-        <h2>{title}</h2>
-      </div>
+      <h2>{title}</h2>
       <div style={{ marginLeft: scrollX }} className={styles["movie-slider"]}>
         {movies.map((movie, index) => (
           <button

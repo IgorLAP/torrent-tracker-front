@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 
 import { AiOutlineSearch } from "react-icons/ai";
+import { HiChevronUp, HiChevronDown } from "react-icons/hi";
 import ReactLoading from "react-loading";
 import Swal from "sweetalert2";
 
@@ -16,6 +17,13 @@ export function App() {
   const [loading, setLoading] = useState(false);
   const [absoluteLoading, setAbsoluteLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [ordering, setOrdering] = useState<{
+    size: "" | "asc" | "desc";
+    seed: "" | "asc" | "desc";
+  }>({
+    size: "",
+    seed: "asc",
+  });
 
   useEffect(() => {
     getMovies();
@@ -32,7 +40,7 @@ export function App() {
       })
       .catch((error) => {
         setLoading(false);
-        alert(error.message);
+        alert("Error getting movies");
       });
   }
 
@@ -73,9 +81,9 @@ export function App() {
             generateLink(magnetLink);
             setAbsoluteLoading(false);
           })
-          .catch((error) => {
+          .catch(() => {
             setAbsoluteLoading(false);
-            alert(error.message);
+            alert("Error getting your link");
           });
       }
     });
@@ -96,13 +104,57 @@ export function App() {
       .then((results) => results.json())
       .then((response) => {
         const { torrents: torrentList } = response;
+        setOrdering({
+          size: "",
+          seed: "asc",
+        });
         setTorrents(torrentList);
         setAbsoluteLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setAbsoluteLoading(false);
-        alert(error.message);
+        alert("Search failed");
       });
+  }
+
+  function seedSizeToNum(value: string | number): number {
+    if (typeof value === "number") {
+      return value;
+    }
+
+    const [qt, unity] = value.split(" ");
+    if (unity.includes("GB") || unity.includes("TB")) {
+      if (qt.includes(".")) {
+        return Number(qt.split(".").join("000."));
+      }
+      return Number(qt.concat("000"));
+    }
+
+    return Number(qt);
+  }
+
+  function handleOrder(orderBy: "seed" | "size") {
+    const ascSortSeed = [...torrents].sort(
+      (a, b) => seedSizeToNum(b[orderBy]) - seedSizeToNum(a[orderBy])
+    );
+    const descSortSeed = [...torrents].sort(
+      (a, b) => seedSizeToNum(a[orderBy]) - seedSizeToNum(b[orderBy])
+    );
+    if (torrents[0].name === ascSortSeed[0].name) {
+      setTorrents(descSortSeed);
+      setOrdering({
+        ...ordering,
+        seed: orderBy === "seed" ? "desc" : "",
+        size: orderBy === "size" ? "desc" : "",
+      });
+    } else {
+      setTorrents(ascSortSeed);
+      setOrdering({
+        ...ordering,
+        seed: orderBy === "seed" ? "asc" : "",
+        size: orderBy === "size" ? "asc" : "",
+      });
+    }
   }
 
   return (
@@ -132,15 +184,11 @@ export function App() {
               movies={movies}
               title="Movies"
               handleGetLink={handleGetLink}
-              setAbsoluteLoading={setAbsoluteLoading}
-              setMovies={setMovies}
             />
             <HighlightList
               movies={fourKMovies}
               title="4K Movies"
               handleGetLink={handleGetLink}
-              setAbsoluteLoading={setAbsoluteLoading}
-              setMovies={setFourKMovies}
             />
             <main className={styles.main}>
               <form className={styles.form} onSubmit={handleSubmit}>
@@ -160,8 +208,40 @@ export function App() {
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Size</th>
-                        <th>Seeds</th>
+                        <th>
+                          Size
+                          <button
+                            type="button"
+                            className={styles["order-btn"]}
+                            onClick={() => handleOrder("size")}
+                          >
+                            <HiChevronUp
+                              color={
+                                ordering.size === "asc" ? "green" : "white"
+                              }
+                            />
+                            <HiChevronDown
+                              color={ordering.size === "desc" ? "red" : "white"}
+                            />
+                          </button>
+                        </th>
+                        <th>
+                          Seeds
+                          <button
+                            type="button"
+                            className={styles["order-btn"]}
+                            onClick={() => handleOrder("seed")}
+                          >
+                            <HiChevronUp
+                              color={
+                                ordering.seed === "asc" ? "green" : "white"
+                              }
+                            />
+                            <HiChevronDown
+                              color={ordering.seed === "desc" ? "red" : "white"}
+                            />
+                          </button>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>

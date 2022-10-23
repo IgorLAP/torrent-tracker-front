@@ -3,33 +3,6 @@
   position: relative;
 }
 
-.list-action{
-  display: flex;
-  margin: .5rem;
-}
-
-.refresh-btn {
-  background: var(--background);
-  color: var(--white);
-  border: none;
-  border-radius: .2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: .25rem;
-  margin-right: .5rem;
-  transition: all ease .2s;
-
-  svg {
-    width: 25px;
-    height: 25px;
-  }
-
-  &:hover {
-    background: var(--purple);
-  }
-}
-
 .movie-slider {
   display: flex;
   overflow: hidden;

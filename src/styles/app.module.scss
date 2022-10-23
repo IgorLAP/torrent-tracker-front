@@ -68,9 +68,24 @@
   border-spacing: 0 .5rem;
 
   th {
-    text-align: start;
     text-transform: uppercase;
     min-width: 80px;
+  
+    &:first-child {
+      text-align: start;
+    }
+
+    &:nth-child(2), &:nth-child(3) {
+      text-align: end;
+    }
+  }
+
+  .order-btn {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 20px;
+    margin-left: .25rem;
   }
 
   td {
@@ -85,10 +100,10 @@
   tr {
     transition: all ease .2s;
     line-height: 1.5rem;
+  }
 
-    &:hover {
-      filter: brightness(.7);
-    }
+  tbody tr:hover {
+    filter: brightness(.7);
   }
 
   @for $i from 1 through 50 {
