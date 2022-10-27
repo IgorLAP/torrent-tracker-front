@@ -130,6 +130,13 @@ export function App() {
       return Number(qt.concat("000"));
     }
 
+    if (unity.toUpperCase().includes("KB")) {
+      if (qt.includes(".")) {
+        return Number(`0.${qt.split(".")[0]}`);
+      }
+      return Number(`0.${qt}`);
+    }
+
     return Number(qt);
   }
 
