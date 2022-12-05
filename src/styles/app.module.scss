@@ -24,11 +24,11 @@
     border: none;
     border-bottom: 1px solid var(--white);
     color: var(--white);
-    padding: .4rem .25rem;
+    padding: 0.4rem 0.25rem;
     width: 50%;
     height: 45px;
     font-size: 1rem;
-    transition: all ease .2s;
+    transition: all ease 0.2s;
 
     &::placeholder {
       color: var(--white);
@@ -42,10 +42,10 @@
     color: var(--white);
     border: none;
     margin: auto 0;
-    padding: .25rem;
-    margin-left: .2rem;
-    border-radius: .25rem;
-    transition: all ease .2s;
+    padding: 0.25rem;
+    margin-left: 0.2rem;
+    border-radius: 0.25rem;
+    transition: all ease 0.2s;
 
     &:hover {
       background: var(--purple);
@@ -65,18 +65,29 @@
 .table {
   width: 100%;
   margin: 1rem 0;
-  border-spacing: 0 .5rem;
+  border-spacing: 0 0.5rem;
 
   th {
     text-transform: uppercase;
-    min-width: 80px;
-  
+
     &:first-child {
       text-align: start;
     }
 
-    &:nth-child(2), &:nth-child(3) {
+    &:nth-child(2) {
+      min-width: 100px;
       text-align: end;
+    }
+
+    &:last-child {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-left: 0.5rem;
+
+      .order-btn {
+        display: flex;
+      }
     }
   }
 
@@ -85,7 +96,7 @@
     border: none;
     color: var(--white);
     font-size: 20px;
-    margin-left: .25rem;
+    margin-left: 0.25rem;
 
     svg {
       font-size: 18px;
@@ -94,7 +105,7 @@
 
   td {
     cursor: pointer;
-    padding: 0 .25rem;
+    padding: 0 0.25rem;
   }
 
   .content-tr td:not(:first-child) {
@@ -102,25 +113,19 @@
   }
 
   tr {
-    transition: all ease .2s;
+    transition: all ease 0.2s;
     line-height: 1.5rem;
   }
 
   tbody tr:hover {
-    filter: brightness(.7);
+    filter: brightness(0.7);
   }
 
-  @for $i from 1 through 50 {
-    @if $i % 2 == 0 {
-      .content-tr:nth-child(#{$i}) {
-        background: transparent;
-      }
-    }
-    @else {
-      .content-tr:nth-child(#{$i}) {
-        background: var(--purple);
-      }
-    }
+  .content-tr:nth-child(even) {
+    background: transparent;
+  }
+  .content-tr:nth-child(odd) {
+    background: var(--purple);
   }
 }
 
@@ -137,13 +142,13 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, .8);
+    background: rgba(0, 0, 0, 0.8);
   }
 }
 
 @media screen and (max-width: 980px) {
   .table {
-    font-size: .9rem;
+    font-size: 0.9rem;
 
     .content-tr td:first-child {
       max-width: 220px;
