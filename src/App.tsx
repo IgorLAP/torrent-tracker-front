@@ -29,6 +29,12 @@ export function App() {
     getMovies();
   }, []);
 
+  useEffect(() => {
+    if (!absoluteLoading) {
+      changePageTitle();
+    }
+  }, [absoluteLoading]);
+
   function getMovies() {
     if (movies.length === 0) setLoading(true);
     fetch("https://torrent-tracker.deta.dev/new-movies")
@@ -115,6 +121,16 @@ export function App() {
         setAbsoluteLoading(false);
         alert("Search failed");
       });
+  }
+
+  function changePageTitle() {
+    if (torrents.length === 0) {
+      document.title = "Torrent Tracker";
+    }
+
+    if (torrents.length > 0) {
+      document.title = `${search} - Torrent Tracker`;
+    }
   }
 
   function seedSizeToNum(value: string | number): number {
