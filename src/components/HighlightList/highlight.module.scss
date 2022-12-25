@@ -3,10 +3,14 @@
   position: relative;
 }
 
+h2 {
+  font-size: clamp(1rem, 2vw, 2rem);
+}
+
 .movie-slider {
   display: flex;
-  overflow: hidden;
-  transition: all ease .2s;
+  overflow-x: hidden;
+  transition: all ease 0.2s;
 
   .movie-card {
     background: transparent;
@@ -21,8 +25,8 @@
         display: block;
       }
     }
-  
-    &+ .movie-card {
+
+    & + .movie-card {
       margin-left: 1rem;
     }
   }
@@ -33,15 +37,15 @@
     background-color: #000;
     height: fit-content;
     color: var(--white);
-    font-size: .65rem;
-    padding: .25rem;
+    font-size: 0.65rem;
+    padding: 0.25rem;
   }
 
   img {
     height: 220px;
-    transition: all ease .2s;
+    transition: all ease 0.2s;
     cursor: pointer;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
   }
 }
 
@@ -62,8 +66,8 @@
     background: transparent;
     border: none;
     color: var(--white);
-    border-radius: .25rem;
-    transition: all ease .2s;
+    border-radius: 0.25rem;
+    transition: all ease 0.2s;
 
     &:hover {
       background: var(--background);
@@ -73,5 +77,21 @@
       width: 35px;
       height: 35px;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movie-slider {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+
+    img {
+      height: 160px;
+    }
+  }
+
+  .control-btns {
+    display: none;
   }
 }
